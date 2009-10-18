@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.email = "matt@matthaynes.net"
   s.homepage = "http://github.com/matth/mayfly/tree/master"
   s.summary = "A tiny HTTP server with a very short lifespan"
+  s.description = "mayfly is a tiny HTTP server with a very short lifespan, existing only to serve a single file for a predefined number of times, it then quietly shuffles off this mortal coil. "
   s.bindir = 'bin'
   s.executables << 'mayfly'
   s.files = ["lib/mayfly.rb", "lib/mayfly/file.rb", "lib/mayfly/servlet.rb", "lib/mayfly/utils.rb"]

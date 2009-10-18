@@ -16,11 +16,11 @@ Mayfly lives at http://github.com/matth/mayfly/
 
 Run the following if you haven't already:
 
-	gem sources -a http://gems.github.com
+	gem sources -a http://gemcutter.org
 
 Install the gem:
 
-	sudo gem install matth-mayfly
+	sudo gem install mayfly
 	
 == Usage 
 
@@ -56,7 +56,7 @@ To list the full set of options:
 	
 == Uninstall
 
-	sudo gem uninstall matth-mayfly -a
+	sudo gem uninstall mayfly -a
 
 == To do
 
