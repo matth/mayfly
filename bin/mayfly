@@ -1,0 +1,68 @@
+#!/usr/bin/ruby
+
+$:.push(File.dirname(__FILE__) + "/../lib")
+
+require 'optparse'
+require 'ostruct'
+require 'mayfly'
+
+include Mayfly
+
+options = OpenStruct.new
+
+OptionParser.new do |opts|
+  
+  opts.banner = 'Usage: mayfly [options] file'
+  opts.on("-h", "--help", "Show this message") {|h| options.help = h}  
+  opts.on("-v", "--verbose", "Run verbosely") {|v| options.verbose = v}
+  opts.on("-pnumber", "--port  number", Integer, "Port number, default 7887") {|p| options.port = p}
+  opts.on("-lnumber", "--lives number", Integer, "How long mayfly should live for, how many requests it serves, default 1") {|l| options.lives = l}  
+  opts.on("--[no-]secure", "Turn https on or off, off by default") {|s| options.secure = s}
+  opts.on("--[no-]auth", "Turn authentication on or off, off by default") {|a| options.auth = a}
+  opts.on("--passwd password", String,"If using auth then provide your password as an argument") {|p| options.passwd = p}    
+  opts.on("--version", "Show version") do
+    puts "Mayfly " + Mayfly::VERSION.join('.')
+    exit
+  end  
+    
+  begin
+    opts.parse!
+  rescue OptionParser::MissingArgument, 
+         OptionParser::InvalidOption, 
+         OptionParser::InvalidArgument => e
+    puts e.message + ', use --help for more details'
+    exit 1
+  end
+
+  if (options.help)
+    puts opts
+    exit 1
+  end
+
+  if (ARGV.length != 1)
+    puts "File argument not specified, use --help for more details"
+    exit 1
+  end
+  
+end
+
+file   = ARGV[0]
+port   = options.port  || 7887
+lives  = options.lives || 1
+secure = options.secure
+passwd = options.passwd  ||= Mayfly::Utils::Cli.get_passwd if (options.auth)
+verbose = options.verbose || false
+
+args = [file, port.to_i, lives.to_i, secure, passwd, verbose]
+
+if (ENV['MAYFLY_TESTING']) # Just test the stuff here happens ok
+  system("echo #{args.join(',')}")
+else 
+  begin
+    server = Server.new(*args)
+    server.start
+  rescue FileNotFoundException  => e
+    puts "#{e.message}, shutting down"
+    exit 1  
+  end
+end

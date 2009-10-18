@@ -1,0 +1,91 @@
+= mayfly
+
+mayfly is a tiny HTTP server with a very short lifespan, existing only to serve a single file for a predefined number of times, it then quietly shuffles off this mortal coil. 
+
+== Features
+
+* HTTPS transfers
+* Basic Auth
+* Growl support for Mac users
+
+== Source 
+
+Mayfly lives at http://github.com/matth/mayfly/
+
+== Installation 
+
+Run the following if you haven't already:
+
+	gem sources -a http://gems.github.com
+
+Install the gem:
+
+	sudo gem install matth-mayfly
+	
+== Usage 
+
+Basic usage:
+
+	mayfly /path/to/your/file
+
+Server the file 10 times:
+
+	mayfly --lives 10 /path/to/your/file
+
+On a different port:
+
+	mayfly --port 3333 /path/to/your/file
+
+Over HTTPS with Basic Auth:
+
+	mayfly --secure --auth /path/to/your/file
+	
+To list the full set of options:
+
+	mayfly --help
+	
+	Usage: mayfly [options] file
+	    -h, --help                       Show this message
+	    -v, --verbose                    Run verbosely
+	    -p, --port  number               Port number, default 7887
+	    -l, --lives number               How long mayfly should live for, how many requests it serves, default 1
+	        --[no-]secure                Turn https on or off, off by default
+	        --[no-]auth                  Turn authentication on or off, off by default
+	        --passwd password            If using auth then provide your password as an argument
+	        --version                    Show version
+	
+== Uninstall
+
+	sudo gem uninstall matth-mayfly -a
+
+== To do
+
+Some nice to haves
+
+* A nice icon, especially for Growl notifications
+* A --quiet option
+* More extensive tests
+
+== Known Issues:
+
+* Seems to crash with large files over HTTPS
+* Concurrency? Probably not
+
+== License:
+
+(GPLv3)
+
+Copyright (C) 2009 Matt Haynes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
