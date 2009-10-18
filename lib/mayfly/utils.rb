@@ -2,7 +2,7 @@ module Mayfly
   module Utils
 
     require 'rubygems'
-    gem 'visionmedia-growl', '=1.0.3'
+    gem 'growl', '=1.0.3'
     require 'growl'
     include Growl
     
