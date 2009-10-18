@@ -71,6 +71,10 @@ Some nice to haves
 * Seems to crash with large files over HTTPS
 * Concurrency? Probably not
 
+== Authors notes
+
+This project was inspired by a very similar application I once read about online. I'd like to have used that app but can't for the life of me remember what it was called. Oh well, it's more fun to roll your own. 
+
 == License:
 
 (GPLv3)
