@@ -27,6 +27,10 @@ Install the gem:
 Basic usage:
 
 	mayfly /path/to/your/file
+	
+Your file will now be available at:
+
+    http://localhost:7887/mayfly/
 
 Server the file 10 times:
 
